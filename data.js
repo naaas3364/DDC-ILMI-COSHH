@@ -29,7 +29,7 @@ const chemicals = [
     "msdsStatus": "Yes",
     "coshhStatus": "Yes",
     "briefingRecord": "Yes",
-    "sdsCoshhLink": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints Interchar 212 Grey Part A Base.pdf""
+    "sdsCoshhLink": ""https://daidung-my.sharepoint.com/personal/sonu_ummer_daidungcorp_com/Documents/MASTER%20FILE/COSHH%20&%20MSDS/Action%20Can%20AS-90%20Welder%20Multiuse%20Spray.pdf?CT=1781354709254&OR=ItemsView""
   },
   {
     "id": 2,
