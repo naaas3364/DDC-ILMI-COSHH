@@ -29,7 +29,7 @@ const chemicals = [
     "msdsStatus": "Yes",
     "coshhStatus": "Yes",
     "briefingRecord": "Yes",
-    "sdsCoshhLink": "COSHH%20&%20MSDS/International%20Paints%20Intergard%20251%20Part%20A%20Base.pdf"
+    "sdsCoshhLink": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints Interchar 212 Grey Part A Base.pdf""
   },
   {
     "id": 2,
