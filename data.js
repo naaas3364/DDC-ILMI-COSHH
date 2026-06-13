@@ -52,7 +52,7 @@ const chemicals = [
       "environment",
       "health_hazard"
     ],
-    "pdf": ""
+    "pdf": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints Intergard 251 Part A Base.pdf""
   },
   {
     "id": 2,
@@ -67,7 +67,7 @@ const chemicals = [
       "flammable",
       "health_hazard"
     ],
-    "pdf": ""
+    "pdf": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints Intergard 251 Part B Curing Agent.pdf""
   },
   {
     "id": 3,
@@ -84,7 +84,7 @@ const chemicals = [
       "environment",
       "health_hazard"
     ],
-    "pdf": ""
+    "pdf": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints GTA 220 Thinner.pdf""
   },
   {
     "id": 4,
@@ -100,7 +100,7 @@ const chemicals = [
       "serious_health_hazard",
       "health_hazard"
     ],
-    "pdf": ""
+    "pdf": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints Interchar 212 Grey Part A Base.pdf""
   },
   {
     "id": 5,
@@ -117,7 +117,7 @@ const chemicals = [
       "serious_health_hazard",
       "health_hazard"
     ],
-    "pdf": ""
+    "pdf": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints Interchar 212 Grey Part B Curing Agent.pdf""
   },
   {
     "id": 6,
@@ -132,7 +132,7 @@ const chemicals = [
       "flammable",
       "health_hazard"
     ],
-    "pdf": ""
+    "pdf": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints GTA 123 Thinner.pdf""
   },
   {
     "id": 7,
@@ -147,7 +147,7 @@ const chemicals = [
       "flammable",
       "health_hazard"
     ],
-    "pdf": ""
+    "pdf": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints Interthane 870 RAL9005 Part A Base.pdf""
   },
   {
     "id": 8,
@@ -162,7 +162,7 @@ const chemicals = [
       "flammable",
       "health_hazard"
     ],
-    "pdf": ""
+    "pdf": ""C:\Users\SonuUmmer\OneDrive - CONG TY CP CO KHI XAY DUNG THUONG MAI DAI DUNG\MASTER FILE\COSHH & MSDS\International Paints Interthane 870 Part B Curing Agent.pdf""
   },
   {
     "id": 9,
