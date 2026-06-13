@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DDC MSDS Library</title>
+  <script src="data.js"></script>
+  <style>
+    :root { --blue:#244f8f; --dark:#001b44; --bg:#eef2f7; --border:#d7dde6; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--dark); }
+    header { background:var(--blue); color:#fff; text-align:center; padding:28px 10px; }
+    header h1 { margin:0; font-size:28px; }
+    header p { margin:8px 0 0; }
+    .note { background:#fff8e1; border-bottom:1px solid #eadca5; padding:10px 18px; font-size:13px; text-align:center; }
+    .legend { background:#fff; padding:12px 16px; text-align:center; border-bottom:1px solid var(--border); }
+    .legend span { display:inline-flex; align-items:center; gap:6px; margin:5px 10px; font-size:13px; white-space:nowrap; }
+    .legend img { width:28px; height:28px; object-fit:contain; }
+    .search-wrap { background:#fff; padding:16px; text-align:center; border-bottom:1px solid var(--border); }
+    #search { width:min(540px, 92%); padding:12px 15px; border:1px solid #bcc8d8; border-radius:9px; font-size:16px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)); gap:18px; padding:18px; }
+    .card { background:#fff; border-radius:10px; box-shadow:0 1px 6px rgba(0,0,0,.12); padding:16px; border-top:5px solid var(--blue); min-height:178px; display:flex; flex-direction:column; }
+    .card.flammable { border-top-color:#c0392b; }
+    .card.explosive { border-top-color:#c0392b; }
+    .card.oxidizer { border-top-color:#d35400; }
+    .card.gas_under_pressure { border-top-color:#2980b9; }
+    .card.corrosive, .card.acute_toxicity { border-top-color:#8e44ad; }
+    .card.environment { border-top-color:#2980b9; }
+    .card.serious_health_hazard, .card.health_hazard { border-top-color:#27ae60; }
+    .name { font-weight:700; margin-bottom:10px; line-height:1.35; min-height:38px; }
+    .meta { color:#36465e; font-size:13px; margin:3px 0; }
+    .icons { min-height:40px; margin:8px 0 12px; }
+    .ghs-img { width:36px; height:36px; object-fit:contain; margin:2px 5px 2px 0; vertical-align:middle; }
+    .btn { display:block; text-align:center; text-decoration:none; color:#12458d; border:1px solid #b7c8df; border-radius:6px; padding:9px; font-weight:600; margin-top:auto; }
+    .btn:hover { background:#f2f7ff; }
+    .disabled { color:#777; border-color:#ddd; pointer-events:none; }
+    .single { max-width:700px; margin:24px auto; }
+    .single .card { min-height:auto; }
+    .single .name { font-size:22px; min-height:0; }
+    .single .ghs-img { width:58px; height:58px; }
+    .notfound { background:white; margin:24px auto; padding:24px; max-width:600px; border-radius:10px; text-align:center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DDC MSDS Library</h1>
+    <p>Click to Access Safety Data Sheets</p>
+  </header>
+
+  <div class="note">GHS pictograms are mapped from the X marks in the hazardous chemical inventory.</div>
+  <div class="legend" id="legend"></div>
+  <div class="search-wrap" id="searchWrap"><input id="search" placeholder="Search chemicals..." oninput="renderList()"></div>
+  <main id="app" class="grid"></main>
+
+<script>
+function icon(key) {
+  const p = ghsPictograms[key];
+  if (!p) return "";
+  return `<img class="ghs-img" src="${p.image}" alt="${p.label}" title="${p.label}">`;
+}
+
+function chemicalCard(c) {
+  const first = c.ghs && c.ghs.length ? c.ghs[0] : "";
+  const msdsButton = c.pdf
+    ? `<a class="btn" href="${c.pdf}" target="_blank" rel="noopener">📄 View MSDS</a>`
+    : `<a class="btn disabled">📄 MSDS link pending</a>`;
+  return `<div class="card ${first}">
+    <div class="name">${c.name}</div>
+    <div class="icons">${(c.ghs || []).map(icon).join("") || "<span class='meta'>No GHS pictogram marked</span>"}</div>
+    ${c.manufacturer ? `<div class="meta"><b>Manufacturer:</b> ${c.manufacturer}</div>` : ""}
+    ${c.qty ? `<div class="meta"><b>Qty:</b> ${c.qty}</div>` : ""}
+    ${c.flashPoint ? `<div class="meta"><b>Flash Point:</b> ${c.flashPoint}</div>` : ""}
+    ${c.msds ? `<div class="meta"><b>MSDS:</b> ${c.msds}</div>` : ""}
+    ${c.coshh ? `<div class="meta"><b>COSHH:</b> ${c.coshh}</div>` : ""}
+    <br>${msdsButton}
+  </div>`;
+}
+
+function renderLegend() {
+  const order = ["flammable","explosive","oxidizer","gas_under_pressure","corrosive","acute_toxicity","health_hazard","serious_health_hazard","environment"];
+  document.getElementById("legend").innerHTML = order.map(k => {
+    const p = ghsPictograms[k];
+    return `<span><img src="${p.image}" alt="${p.label}"> ${p.label}</span>`;
+  }).join("");
+}
+
+function renderList() {
+  const search = (document.getElementById("search")?.value || "").toLowerCase();
+  const filtered = chemicals.filter(c =>
+    c.name.toLowerCase().includes(search) ||
+    (c.manufacturer || "").toLowerCase().includes(search)
+  );
+  document.getElementById("app").className = "grid";
+  document.getElementById("app").innerHTML = filtered.map(chemicalCard).join("");
+}
+
+function renderSingle(id) {
+  document.getElementById("searchWrap").style.display = "none";
+  const chemical = chemicals.find(c => c.id === id);
+  if (!chemical) {
+    document.getElementById("app").className = "notfound";
+    document.getElementById("app").innerHTML = `<h2>MSDS Not Found</h2><p>Please check the QR code ID or contact HSE Department.</p>`;
+    return;
+  }
+  document.getElementById("app").className = "single";
+  document.getElementById("app").innerHTML = chemicalCard(chemical);
+}
+
+renderLegend();
+const params = new URLSearchParams(window.location.search);
+const id = Number(params.get("id"));
+if (id) { renderSingle(id); } else { renderList(); }
+</script>
+</body>
+</html>
