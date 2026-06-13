@@ -3,113 +3,325 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DDC MSDS Library</title>
+  <title>DDC ILMI SDS & COSHH Assessment Library</title>
   <script src="data.js"></script>
   <style>
-    :root { --blue:#244f8f; --dark:#001b44; --bg:#eef2f7; --border:#d7dde6; }
+    :root {
+      --blue: #254f91;
+      --dark-blue: #06204a;
+      --green: #149b54;
+      --red: #c8322b;
+      --amber: #d86812;
+      --purple: #8e44ad;
+      --bg: #f2f6fb;
+      --card: #ffffff;
+      --border: #d7e0ee;
+      --text: #0a2248;
+      --muted: #627086;
+    }
     * { box-sizing: border-box; }
-    body { margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--dark); }
-    header { background:var(--blue); color:#fff; text-align:center; padding:28px 10px; }
-    header h1 { margin:0; font-size:28px; }
-    header p { margin:8px 0 0; }
-    .note { background:#fff8e1; border-bottom:1px solid #eadca5; padding:10px 18px; font-size:13px; text-align:center; }
-    .legend { background:#fff; padding:12px 16px; text-align:center; border-bottom:1px solid var(--border); }
-    .legend span { display:inline-flex; align-items:center; gap:6px; margin:5px 10px; font-size:13px; white-space:nowrap; }
-    .legend img { width:28px; height:28px; object-fit:contain; }
-    .search-wrap { background:#fff; padding:16px; text-align:center; border-bottom:1px solid var(--border); }
-    #search { width:min(540px, 92%); padding:12px 15px; border:1px solid #bcc8d8; border-radius:9px; font-size:16px; }
-    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)); gap:18px; padding:18px; }
-    .card { background:#fff; border-radius:10px; box-shadow:0 1px 6px rgba(0,0,0,.12); padding:16px; border-top:5px solid var(--blue); min-height:178px; display:flex; flex-direction:column; }
-    .card.flammable { border-top-color:#c0392b; }
-    .card.explosive { border-top-color:#c0392b; }
-    .card.oxidizer { border-top-color:#d35400; }
-    .card.gas_under_pressure { border-top-color:#2980b9; }
-    .card.corrosive, .card.acute_toxicity { border-top-color:#8e44ad; }
-    .card.environment { border-top-color:#2980b9; }
-    .card.serious_health_hazard, .card.health_hazard { border-top-color:#27ae60; }
-    .name { font-weight:700; margin-bottom:10px; line-height:1.35; min-height:38px; }
-    .meta { color:#36465e; font-size:13px; margin:3px 0; }
-    .icons { min-height:40px; margin:8px 0 12px; }
-    .ghs-img { width:36px; height:36px; object-fit:contain; margin:2px 5px 2px 0; vertical-align:middle; }
-    .btn { display:block; text-align:center; text-decoration:none; color:#12458d; border:1px solid #b7c8df; border-radius:6px; padding:9px; font-weight:600; margin-top:auto; }
-    .btn:hover { background:#f2f7ff; }
-    .disabled { color:#777; border-color:#ddd; pointer-events:none; }
-    .single { max-width:700px; margin:24px auto; }
-    .single .card { min-height:auto; }
-    .single .name { font-size:22px; min-height:0; }
-    .single .ghs-img { width:58px; height:58px; }
-    .notfound { background:white; margin:24px auto; padding:24px; max-width:600px; border-radius:10px; text-align:center; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: linear-gradient(90deg, #173f78, #2e5ba2);
+      color: white;
+      padding: 26px 16px 24px;
+      text-align: center;
+    }
+    header h1 { margin: 0; font-size: 25px; letter-spacing: .2px; }
+    header p { margin: 6px 0 0; font-size: 14px; opacity: .95; }
+    .legend-wrap {
+      background: #fff;
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 10px;
+      font-size: 13px;
+      color: #333;
+    }
+    .legend-item img, .ghs-icon {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+    .toolbar {
+      padding: 16px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .search {
+      width: min(520px, 96%);
+      padding: 12px 14px;
+      border: 1px solid #c7d2e1;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    .btn-small {
+      padding: 11px 14px;
+      border: 1px solid #b9c9df;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      color: var(--blue);
+      font-weight: 700;
+    }
+    main { padding: 18px; max-width: 1500px; margin: auto; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(15, 35, 70, .08);
+      padding: 14px;
+      min-height: 185px;
+      position: relative;
+      border-top: 5px solid var(--green);
+    }
+    .card.high { border-top-color: var(--red); }
+    .card.medium { border-top-color: var(--amber); }
+    .card.health { border-top-color: var(--purple); }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      line-height: 1.25;
+      color: var(--dark-blue);
+    }
+    .icons {
+      min-height: 40px;
+      margin: 8px 0 12px;
+    }
+    .link-btn {
+      display: block;
+      text-align: center;
+      padding: 10px 12px;
+      border: 1px solid #b9c9df;
+      border-radius: 7px;
+      color: var(--blue);
+      background: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .link-btn:hover { background: #edf4ff; }
+    .link-btn.disabled {
+      color: #8792a3;
+      background: #f3f5f8;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .meta div {
+      background: #f6f9fe;
+      border: 1px solid #e2e8f3;
+      padding: 8px;
+      border-radius: 7px;
+      font-size: 13px;
+    }
+    .meta b { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; margin-bottom: 3px; }
+    .detail {
+      max-width: 760px;
+      margin: 20px auto;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 3px 14px rgba(15, 35, 70, .12);
+      padding: 22px;
+    }
+    .detail h2 {
+      margin: 0 0 12px;
+      font-size: 25px;
+      color: var(--dark-blue);
+    }
+    .detail .icons { margin: 14px 0 18px; }
+    .back { display: inline-block; margin-bottom: 14px; color: var(--blue); text-decoration: none; font-weight: 700; }
+    .notice {
+      background: #fff7e6;
+      border: 1px solid #ffd38a;
+      color: #704600;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      margin-top: 14px;
+      line-height: 1.45;
+    }
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 40px;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 18px;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>DDC MSDS Library</h1>
-    <p>Click to Access Safety Data Sheets</p>
-  </header>
+<header>
+  <h1>DDC ILMI SDS &amp; COSHH Assessment Library</h1>
+  <p>Scan QR code or search to access chemical SDS &amp; COSHH assessment documents</p>
+</header>
 
-  <div class="note">GHS pictograms are mapped from the X marks in the hazardous chemical inventory.</div>
-  <div class="legend" id="legend"></div>
-  <div class="search-wrap" id="searchWrap"><input id="search" placeholder="Search chemicals..." oninput="renderList()"></div>
-  <main id="app" class="grid"></main>
+<div class="legend-wrap" id="legend"></div>
+
+<div class="toolbar" id="toolbar">
+  <input class="search" id="searchBox" placeholder="Search chemicals, manufacturer, hazard, batch..." />
+  <button class="btn-small" onclick="clearSearch()">Clear</button>
+</div>
+
+<main id="app"></main>
+
+<footer>
+  HSE Department · DaiDung Steel &amp; Construction · ILMI Project
+</footer>
 
 <script>
-function icon(key) {
-  const p = ghsPictograms[key];
-  if (!p) return "";
-  return `<img class="ghs-img" src="${p.image}" alt="${p.label}" title="${p.label}">`;
-}
-
-function chemicalCard(c) {
-  const first = c.ghs && c.ghs.length ? c.ghs[0] : "";
-  const msdsButton = c.pdf
-    ? `<a class="btn" href="${c.pdf}" target="_blank" rel="noopener">📄 View MSDS</a>`
-    : `<a class="btn disabled">📄 MSDS link pending</a>`;
-  return `<div class="card ${first}">
-    <div class="name">${c.name}</div>
-    <div class="icons">${(c.ghs || []).map(icon).join("") || "<span class='meta'>No GHS pictogram marked</span>"}</div>
-    ${c.manufacturer ? `<div class="meta"><b>Manufacturer:</b> ${c.manufacturer}</div>` : ""}
-    ${c.qty ? `<div class="meta"><b>Qty:</b> ${c.qty}</div>` : ""}
-    ${c.flashPoint ? `<div class="meta"><b>Flash Point:</b> ${c.flashPoint}</div>` : ""}
-    ${c.msds ? `<div class="meta"><b>MSDS:</b> ${c.msds}</div>` : ""}
-    ${c.coshh ? `<div class="meta"><b>COSHH:</b> ${c.coshh}</div>` : ""}
-    <br>${msdsButton}
-  </div>`;
-}
-
-function renderLegend() {
-  const order = ["flammable","explosive","oxidizer","gas_under_pressure","corrosive","acute_toxicity","health_hazard","serious_health_hazard","environment"];
-  document.getElementById("legend").innerHTML = order.map(k => {
-    const p = ghsPictograms[k];
-    return `<span><img src="${p.image}" alt="${p.label}"> ${p.label}</span>`;
-  }).join("");
-}
-
-function renderList() {
-  const search = (document.getElementById("search")?.value || "").toLowerCase();
-  const filtered = chemicals.filter(c =>
-    c.name.toLowerCase().includes(search) ||
-    (c.manufacturer || "").toLowerCase().includes(search)
-  );
-  document.getElementById("app").className = "grid";
-  document.getElementById("app").innerHTML = filtered.map(chemicalCard).join("");
-}
-
-function renderSingle(id) {
-  document.getElementById("searchWrap").style.display = "none";
-  const chemical = chemicals.find(c => c.id === id);
-  if (!chemical) {
-    document.getElementById("app").className = "notfound";
-    document.getElementById("app").innerHTML = `<h2>MSDS Not Found</h2><p>Please check the QR code ID or contact HSE Department.</p>`;
-    return;
+  function esc(value) {
+    return String(value ?? "").replace(/[&<>"']/g, s => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+    }[s]));
   }
-  document.getElementById("app").className = "single";
-  document.getElementById("app").innerHTML = chemicalCard(chemical);
-}
 
-renderLegend();
-const params = new URLSearchParams(window.location.search);
-const id = Number(params.get("id"));
-if (id) { renderSingle(id); } else { renderList(); }
+  function iconHtml(hazard) {
+    return `<img class="ghs-icon" src="assets/${esc(hazard.icon)}" alt="${esc(hazard.label)}" title="${esc(hazard.key)}">`;
+  }
+
+  function hazardText(item) {
+    return item.hazards && item.hazards.length
+      ? item.hazards.map(h => h.key).join(", ")
+      : "No GHS pictogram marked in inventory";
+  }
+
+  function cardLevel(item) {
+    const keys = item.hazards.map(h => h.key);
+    if (keys.includes("FLAMMABLE") || keys.includes("ACUTE TOXICITY") || keys.includes("CORROSIVE")) return "high";
+    if (keys.includes("SERIOUS HEALTH HAZARD") || keys.includes("HEALTH HAZARD")) return "health";
+    if (keys.includes("HAZARDOUS TO ENVIRONMENT")) return "medium";
+    return "";
+  }
+
+  function docButton(item) {
+    if (!item.sdsCoshhLink) {
+      return `<a class="link-btn disabled">SDS &amp; COSHH Assessment Not Linked</a>`;
+    }
+    return `<a class="link-btn" href="${esc(item.sdsCoshhLink)}" target="_blank" rel="noopener">📄 SDS &amp; COSHH Assessment</a>`;
+  }
+
+  function renderLegend() {
+    document.getElementById("legend").innerHTML = ghsLegend.map(h => `
+      <span class="legend-item"><img src="assets/${esc(h.icon)}" alt="${esc(h.label)}"> ${esc(h.label)}</span>
+    `).join("");
+  }
+
+  function renderGrid(list) {
+    const app = document.getElementById("app");
+    if (!list.length) {
+      app.innerHTML = `<div class="empty">No chemical found.</div>`;
+      return;
+    }
+    app.innerHTML = `<div class="grid">` + list.map(item => `
+      <div class="card ${cardLevel(item)}">
+        <h2>${esc(item.id)}. ${esc(item.name)}</h2>
+        <div class="icons">${item.hazards.map(iconHtml).join("")}</div>
+        <div class="meta">
+          <div><b>Manufacturer</b>${esc(item.manufacturer || "-")}</div>
+          <div><b>Qty Stored</b>${esc(item.qtyStored || "-")}</div>
+          <div><b>Flash Point</b>${esc(item.flashPoint || "-")}</div>
+          <div><b>Expiry</b>${esc(item.expiryDate || "-")}</div>
+        </div>
+        <a class="link-btn" href="?id=${encodeURIComponent(item.id)}">View Chemical Details</a>
+        ${docButton(item)}
+      </div>
+    `).join("") + `</div>`;
+  }
+
+  function renderDetail(item) {
+    const app = document.getElementById("app");
+    document.getElementById("toolbar").style.display = "none";
+    app.innerHTML = `
+      <div class="detail">
+        <a class="back" href="./">← Back to library</a>
+        <h2>${esc(item.id)}. ${esc(item.name)}</h2>
+        <div class="icons">${item.hazards.map(iconHtml).join("")}</div>
+        <div class="meta">
+          <div><b>Hazards</b>${esc(hazardText(item))}</div>
+          <div><b>Manufacturer / Trade Name</b>${esc(item.manufacturer || "-")}</div>
+          <div><b>Flash Point</b>${esc(item.flashPoint || "-")}</div>
+          <div><b>Batch / Lot No.</b>${esc(item.batchNo || "-")}</div>
+          <div><b>HCS Expiry Date</b>${esc(item.expiryDate || "-")}</div>
+          <div><b>Quantity Stored</b>${esc(item.qtyStored || "-")}</div>
+          <div><b>MSDS Status</b>${esc(item.msdsStatus || "-")}</div>
+          <div><b>COSHH Status</b>${esc(item.coshhStatus || "-")}</div>
+          <div><b>Briefing Record</b>${esc(item.briefingRecord || "-")}</div>
+          <div><b>Inventory Excel Row</b>${esc(item.excelRow || "-")}</div>
+        </div>
+        ${docButton(item)}
+        <div class="notice">
+          This page is for quick HSE reference only. Before using any chemical, follow the approved SDS, COSHH assessment, risk assessment, method statement, permit requirements, and site HSE instructions.
+        </div>
+      </div>
+    `;
+  }
+
+  function clearSearch() {
+    const box = document.getElementById("searchBox");
+    box.value = "";
+    renderGrid(chemicals);
+    box.focus();
+  }
+
+  function start() {
+    renderLegend();
+    const params = new URLSearchParams(window.location.search);
+    const id = Number(params.get("id"));
+    if (id) {
+      const item = chemicals.find(c => Number(c.id) === id);
+      if (item) renderDetail(item);
+      else document.getElementById("app").innerHTML = `<div class="empty">Chemical ID not found. Please check the QR code.</div>`;
+      return;
+    }
+    renderGrid(chemicals);
+    document.getElementById("searchBox").addEventListener("input", e => {
+      const q = e.target.value.toLowerCase().trim();
+      const filtered = chemicals.filter(item => {
+        const text = [
+          item.name, item.manufacturer, item.batchNo, item.flashPoint,
+          item.expiryDate, item.qtyStored, hazardText(item)
+        ].join(" ").toLowerCase();
+        return text.includes(q);
+      });
+      renderGrid(filtered);
+    });
+  }
+
+  start();
 </script>
 </body>
 </html>
