@@ -1,6 +1,5 @@
 # DDC ILMI SDS & COSHH Assessment Library
 
-This repository contains a simple GitHub Pages website for quick access to chemical SDS and COSHH assessment documents used at the ILMI Project.
 
 ## Purpose
 
