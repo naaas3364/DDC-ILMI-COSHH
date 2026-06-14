@@ -511,43 +511,240 @@
       text-decoration: underline;
     }
 
+    /* MOBILE FRIENDLY VIEW */
     @media(max-width:850px) {
+      .hero {
+        text-align: center;
+        padding: 26px 14px 22px;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 13px;
+        line-height: 1.4;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .top-actions {
+        justify-content: center;
+        gap: 6px;
+        margin-top: 14px;
+      }
+
+      .pill {
+        font-size: 11px;
+        padding: 7px 9px;
+      }
+
       .stats {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin: -18px auto 12px;
+        padding: 0 10px;
+      }
+
+      .stat {
+        min-height: 72px;
+        padding: 12px 8px;
+        border-radius: 12px;
+      }
+
+      .stat b {
+        font-size: 22px;
+      }
+
+      .stat span {
+        font-size: 10px;
+        line-height: 1.2;
+      }
+
+      .legend-wrap {
+        padding: 8px 6px;
+        text-align: left;
+      }
+
+      .legend-item {
+        font-size: 11px;
+        margin: 3px 6px;
+      }
+
+      .legend-item img,
+      .ghs-icon {
+        width: 30px;
+        height: 30px;
+      }
+
+      .toolbar {
+        position: relative;
+        top: auto;
+        padding: 10px;
       }
 
       .toolbar-inner {
         grid-template-columns: 1fr;
+        gap: 8px;
       }
 
-      .doc-row {
+      .search,
+      .select,
+      button {
+        font-size: 14px;
+        padding: 11px 12px;
+        border-radius: 9px;
+      }
+
+      main {
+        padding: 12px 10px 24px;
+      }
+
+      .grid {
         grid-template-columns: 1fr;
+        gap: 10px;
       }
 
-      .hero {
-        text-align: left;
+      .card {
+        border-radius: 13px;
+        border-top-width: 5px;
       }
 
-      .hero p {
-        margin-left: 0;
+      .card:hover {
+        transform: none;
       }
 
-      .top-actions {
-        justify-content: flex-start;
+      .card-summary {
+        min-height: 118px;
+        padding: 12px;
       }
-    }
 
-    @media(max-width:520px) {
-      .stats {
-        grid-template-columns: 1fr;
+      .card h2 {
+        font-size: 15px;
+        line-height: 1.25;
+        margin-bottom: 6px;
+      }
+
+      .icons {
+        min-height: 32px;
+        margin: 6px 0;
+      }
+
+      .expand-indicator {
+        font-size: 12px;
+        padding: 9px 10px;
+        margin-top: 8px;
+      }
+
+      .card-details {
+        padding: 0 12px 12px;
       }
 
       .meta {
         grid-template-columns: 1fr;
+        gap: 6px;
+        margin: 10px 0;
+      }
+
+      .meta div {
+        font-size: 12px;
+        padding: 7px;
+      }
+
+      .meta b {
+        font-size: 9px;
+      }
+
+      .doc-row {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .link-btn {
+        font-size: 13px;
+        padding: 11px 10px;
+      }
+
+      .detail {
+        margin: 8px auto 18px;
+        padding: 14px;
+        border-radius: 14px;
+      }
+
+      .detail h2 {
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      .tabs {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .tab {
+        width: 100%;
+        border-radius: 10px;
+        font-size: 13px;
+        padding: 10px;
+      }
+
+      .tab-panel {
+        padding: 12px;
+      }
+
+      .notice {
+        font-size: 12px;
+        padding: 10px;
+      }
+
+      footer {
+        font-size: 11px;
+        padding: 16px 10px;
+      }
+    }
+
+    @media(max-width:420px) {
+      .hero h1 {
+        font-size: 21px;
+      }
+
+      .hero p {
+        font-size: 12px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat b {
+        font-size: 20px;
+      }
+
+      .stat span {
+        font-size: 9px;
       }
 
       .card-summary {
-        min-height: 135px;
+        min-height: 110px;
+      }
+
+      .card h2 {
+        font-size: 14px;
+      }
+
+      .legend-item img,
+      .ghs-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .search,
+      .select,
+      button {
+        font-size: 13px;
       }
     }
   </style>
@@ -556,7 +753,7 @@
 <body>
   <section class="hero">
     <h1>DDC ILMI SDS &amp; COSHH Library</h1>
-   
+    
     <div class="top-actions">
       <span class="pill">🏗️ ILMI Project</span>
       <span class="pill">🧪 Chemical Safety</span>
@@ -597,7 +794,7 @@
     HSE Department · DaiDung Steel &amp; Construction · ILMI Project<br>
     For any SDS/COSHH update or query, contact:
     <a href="mailto:sonu.ummer@daidungcorp.com">sonu.ummer@daidungcorp.com</a><br>
-  
+   
   </footer>
 
   <script>
