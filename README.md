@@ -1,6 +1,6 @@
 # DDC ILMI SDS & COSHH Library
 
-This GitHub Pages site provides QR-ready access to chemical safety information for the ILMI Project.
+This Pages provides QR-ready access to chemical safety information for the chemicals used by DDC at ILMI Project.
 
 
 ## Maintained by
