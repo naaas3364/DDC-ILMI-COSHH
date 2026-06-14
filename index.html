@@ -47,7 +47,7 @@
 <body>
 <section class="hero">
   <h1>DDC ILMI SDS &amp; COSHH Library</h1>
-  <p>Interactive chemical safety library for quick access to SDS documents, COSHH assessments, GHS pictograms, storage quantity, expiry details, and briefing status.</p>
+  
   <div class="top-actions"><span class="pill">🏗️ ILMI Project</span><span class="pill">🧪 Chemical Safety</span><span class="pill">📱 QR Ready</span></div>
 </section>
 <div class="stats" id="stats"></div>
@@ -60,7 +60,7 @@
   <button onclick="clearSearch()">Clear</button>
 </div></div>
 <main id="app"></main>
-<footer>HSE Department · DaiDung Steel &amp; Construction · ILMI Project · Auto-generated from inventory.xlsx</footer>
+<footer>HSE Department · DaiDung Steel &amp; Construction · ILMI Project · </footer>
 <script>
   function esc(value){return String(value ?? "").replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[s]));}
   function iconHtml(hazard){return `<img class="ghs-icon" src="assets/${esc(hazard.icon)}" alt="${esc(hazard.label)}" title="${esc(hazard.key)}">`;}
