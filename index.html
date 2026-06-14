@@ -1466,20 +1466,30 @@
       document.getElementById("searchBox").focus();
     }
 
-    function toggleCard(id) {
-      const card = document.getElementById("card-" + id);
-      const indicator = document.getElementById("indicator-" + id);
+   function toggleCard(id) {
+  const selectedCard = document.getElementById("card-" + id);
+  const selectedIndicator = document.getElementById("indicator-" + id);
 
-      if (!card || !indicator) return;
+  if (!selectedCard || !selectedIndicator) return;
 
-      card.classList.toggle("open");
+  const isAlreadyOpen = selectedCard.classList.contains("open");
 
-      if (card.classList.contains("open")) {
-        indicator.innerHTML = "Hide Details ▲";
-      } else {
-        indicator.innerHTML = "View Details ▼";
-      }
-    }
+  // Close all open cards first
+  document.querySelectorAll(".card.open").forEach(card => {
+    card.classList.remove("open");
+  });
+
+  // Reset all indicators
+  document.querySelectorAll(".expand-indicator").forEach(indicator => {
+    indicator.innerHTML = "View Details ▼";
+  });
+
+  // If clicked card was not already open, open it
+  if (!isAlreadyOpen) {
+    selectedCard.classList.add("open");
+    selectedIndicator.innerHTML = "Hide Details ▲";
+  }
+}
 
     function renderGrid(list) {
       const app = document.getElementById("app");
