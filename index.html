@@ -3,26 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DDC ILMI SDS & COSHH Assessment Library</title>
+  <title>DDC ILMI SDS & COSHH Library</title>
   <script src="data.js"></script>
 
   <style>
     :root {
-      --red: #c81919;
-      --dark-red: #8f1111;
-      --green: #087d6f;
-      --dark-blue: #06204a;
-      --amber: #d86812;
-      --purple: #7c2bd6;
-      --bg: #eef4fb;
-      --card: #ffffff;
-      --border: #d7e0ee;
-      --text: #0a2248;
-      --muted: #627086;
+      --red:#b91c1c;
+      --red2:#dc2626;
+      --navy:#061936;
+      --blue:#113c74;
+      --green:#12824c;
+      --amber:#d97706;
+      --purple:#7e22ce;
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --border:#d7e0ee;
+      --text:#0b1f3a;
+      --muted:#627086;
+      --shadow: 0 14px 35px rgba(7, 25, 54, .12);
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -32,175 +38,226 @@
       color: var(--text);
     }
 
-    header {
-      background: linear-gradient(90deg, var(--dark-red), var(--red));
-      color: white;
-      padding: 30px 16px 28px;
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      padding: 34px 16px 26px;
       text-align: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,.14);
+      background:
+        linear-gradient(110deg, rgba(87, 10, 10, .92), rgba(185, 28, 28, .88), rgba(6, 25, 54, .88)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='420' viewBox='0 0 960 420'%3E%3Cdefs%3E%3Cpattern id='p' width='96' height='96' patternUnits='userSpaceOnUse'%3E%3Cpath d='M30 12h36l18 31-18 31H30L12 43z' fill='none' stroke='rgba(255,255,255,.18)' stroke-width='3'/%3E%3Ccircle cx='48' cy='43' r='8' fill='rgba(255,255,255,.10)'/%3E%3Cpath d='M48 16v19M29 61l14-12M67 61L53 49' stroke='rgba(255,255,255,.12)' stroke-width='4' stroke-linecap='round'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='960' height='420' fill='%23061936'/%3E%3Crect width='960' height='420' fill='url(%23p)'/%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
     }
 
-    header h1 {
+    .hero h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: clamp(24px, 4vw, 40px);
       letter-spacing: .2px;
+      font-weight: 800;
     }
 
-    header p {
-      margin: 8px 0 0;
-      font-size: 14px;
-      opacity: .95;
+    .hero p {
+      margin: 8px auto 0;
+      max-width: 820px;
+      font-size: 15px;
+      line-height: 1.5;
+      opacity: .96;
     }
 
-    .top-panel {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 3px 14px rgba(15,35,70,.06);
+    .top-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.25);
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      backdrop-filter: blur(6px);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(145px, 1fr));
+      gap: 12px;
+      max-width: 1080px;
+      margin: -28px auto 18px;
+      padding: 0 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      border: none;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      min-height: 88px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat::after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      right: -25px;
+      top: -25px;
+      background: rgba(255,255,255,.18);
+      border-radius: 50%;
+    }
+
+    .stat:nth-child(1) {
+      background: linear-gradient(135deg, #8f1111, #dc2626);
+    }
+
+    .stat:nth-child(2) {
+      background: linear-gradient(135deg, #06204a, #24538f);
+    }
+
+    .stat:nth-child(3) {
+      background: linear-gradient(135deg, #087d6f, #14a085);
+    }
+
+    .stat:nth-child(4) {
+      background: linear-gradient(135deg, #d86812, #f59e0b);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 28px;
+      color: white;
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat span {
+      color: rgba(255,255,255,.94);
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: .4px;
+      position: relative;
+      z-index: 1;
     }
 
     .legend-wrap {
-      padding: 14px 12px;
+      background: #fff;
+      padding: 12px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       overflow-x: auto;
       white-space: nowrap;
       text-align: center;
-      border-bottom: 1px solid var(--border);
     }
 
     .legend-item {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin: 0 10px;
+      margin: 4px 10px;
       font-size: 13px;
       color: #333;
-      font-weight: 600;
     }
 
     .legend-item img,
     .ghs-icon {
-      width: 34px;
-      height: 34px;
+      width: 35px;
+      height: 35px;
       object-fit: contain;
       vertical-align: middle;
     }
 
     .toolbar {
-      padding: 18px;
-      display: flex;
-      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 16px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.05);
+    }
+
+    .toolbar-inner {
+      max-width: 1250px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.5fr .8fr .8fr .8fr auto;
       gap: 10px;
-      flex-wrap: wrap;
+      align-items: center;
     }
 
     .search,
-    .filter {
-      padding: 12px 14px;
+    .select {
+      width: 100%;
+      padding: 12px 13px;
       border: 1px solid #c7d2e1;
-      border-radius: 8px;
-      font-size: 15px;
-      background: white;
-      color: var(--text);
+      border-radius: 10px;
+      font-size: 14px;
+      background: #fff;
     }
 
-    .search {
-      width: min(520px, 96%);
+    .search:focus,
+    .select:focus {
+      outline: 2px solid rgba(185,28,28,.18);
+      border-color: var(--red);
     }
 
-    .filter {
-      min-width: 180px;
-    }
-
-    .btn-small {
-      padding: 11px 16px;
-      border: 1px solid #b9c9df;
-      border-radius: 8px;
-      background: white;
+    button {
+      padding: 12px 14px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--red);
+      color: #fff;
       cursor: pointer;
-      color: var(--dark-blue);
-      font-weight: 700;
+      font-weight: 800;
     }
 
-    .btn-small:hover {
-      background: #edf4ff;
+    button:hover {
+      background: #991b1b;
     }
 
-    .stat-card {
-  border: none;
-  border-radius: 14px;
-  padding: 16px;
-  box-shadow: 0 4px 14px rgba(15,35,70,.14);
-  text-align: center;
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-card::after {
-  content: "";
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  right: -25px;
-  top: -25px;
-  background: rgba(255,255,255,.18);
-  border-radius: 50%;
-}
-
-.stat-card:nth-child(1) {
-  background: linear-gradient(135deg, #8f1111, #c81919);
-}
-
-.stat-card:nth-child(2) {
-  background: linear-gradient(135deg, #06204a, #24538f);
-}
-
-.stat-card:nth-child(3) {
-  background: linear-gradient(135deg, #087d6f, #14a085);
-}
-
-.stat-card:nth-child(4) {
-  background: linear-gradient(135deg, #d86812, #f59e0b);
-}
-
-.stat-card b {
-  display: block;
-  font-size: 28px;
-  color: white;
-  margin-bottom: 5px;
-  position: relative;
-  z-index: 1;
-}
-
-.stat-card span {
-  color: rgba(255,255,255,.92);
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  position: relative;
-  z-index: 1;
-  letter-spacing: .3px;
-}
     main {
-      padding: 18px;
+      padding: 20px 18px 32px;
       max-width: 1500px;
       margin: auto;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 16px;
       align-items: start;
     }
 
     .card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(15,35,70,.10);
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(15,35,70,.08);
       overflow: hidden;
-      border-top: 5px solid var(--green);
-      transition: all .25s ease;
+      border-top: 6px solid var(--green);
+      transition: .2s transform, .2s box-shadow;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
     }
 
     .card.high {
@@ -215,18 +272,14 @@
       border-top-color: var(--purple);
     }
 
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(15,35,70,.16);
-    }
-
     .card-summary {
-      min-height: 145px;
+      min-height: 150px;
       padding: 16px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      background: #fff;
     }
 
     .card-summary:hover {
@@ -235,33 +288,30 @@
 
     .card h2 {
       margin: 0 0 10px;
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.3;
-      color: var(--dark-blue);
+      color: var(--navy);
     }
 
     .icons {
-      min-height: 38px;
-      margin: 8px 0 10px;
+      min-height: 40px;
+      margin: 8px 0 8px;
     }
 
-    .expand-btn {
-      width: 100%;
-      margin-top: 12px;
+    .expand-indicator {
+      margin-top: 10px;
       padding: 10px 12px;
-      border: 1px solid #b9c9df;
-      border-radius: 8px;
-      background: white;
-      color: var(--dark-blue);
-      font-weight: 800;
-      cursor: pointer;
+      border: 1px solid #d3ddea;
+      border-radius: 10px;
+      color: var(--blue);
+      background: #fff;
       text-align: center;
-      text-decoration: none;
-      display: block;
-      font-size: 14px;
+      font-weight: 800;
+      font-size: 13px;
+      user-select: none;
     }
 
-    .expand-btn:hover {
+    .card-summary:hover .expand-indicator {
       background: #edf4ff;
     }
 
@@ -269,7 +319,7 @@
       display: none;
       padding: 0 16px 16px;
       border-top: 1px solid #e3e9f3;
-      animation: openCard .25s ease;
+      animation: openCard .22s ease;
     }
 
     .card.open .card-details {
@@ -291,14 +341,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin: 14px 0;
+      margin: 14px 0 12px;
     }
 
     .meta div {
       background: #f6f9fe;
       border: 1px solid #e2e8f3;
       padding: 8px;
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 13px;
       word-break: break-word;
     }
@@ -306,67 +356,78 @@
     .meta b {
       display: block;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10px;
       text-transform: uppercase;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
+      letter-spacing: .3px;
     }
 
-    .doc-actions {
+    .doc-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 8px;
       margin-top: 10px;
     }
 
     .link-btn {
       display: block;
       text-align: center;
-      padding: 11px 12px;
-      border-radius: 8px;
-      color: white;
+      padding: 10px 10px;
+      border: 1px solid #d3ddea;
+      border-radius: 9px;
+      color: var(--blue);
+      background: #fff;
       text-decoration: none;
       font-weight: 800;
-      font-size: 14px;
-    }
-
-    .sds-btn {
-      background: var(--red);
-    }
-
-    .coshh-btn {
-      background: var(--green);
+      font-size: 13px;
+      transition: .15s;
     }
 
     .link-btn:hover {
-      opacity: .88;
+      background: #edf4ff;
+    }
+
+    .link-btn.primary {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    .link-btn.primary:hover {
+      background: #991b1b;
+    }
+
+    .link-btn.coshh {
+      background: #0f766e;
+      border-color: #0f766e;
+      color: #fff;
+    }
+
+    .link-btn.coshh:hover {
+      background: #0b5f59;
     }
 
     .link-btn.disabled {
       color: #8792a3;
       background: #f3f5f8;
-      border: 1px solid #d8dee8;
       cursor: not-allowed;
       pointer-events: none;
     }
 
     .detail {
-      max-width: 850px;
-      margin: 20px auto;
-      background: white;
+      max-width: 900px;
+      margin: 10px auto 25px;
+      background: #fff;
       border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: 0 5px 20px rgba(15,35,70,.16);
-      padding: 24px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 22px;
     }
 
     .detail h2 {
       margin: 0 0 12px;
-      font-size: 25px;
-      color: var(--dark-blue);
-    }
-
-    .detail .icons {
-      margin: 14px 0 18px;
+      font-size: 26px;
+      color: var(--navy);
     }
 
     .back {
@@ -377,12 +438,45 @@
       font-weight: 800;
     }
 
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 18px 0 10px;
+    }
+
+    .tab {
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      color: var(--navy);
+      padding: 10px 12px;
+      border-radius: 999px;
+    }
+
+    .tab.active {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+    }
+
+    .tab-panel {
+      display: none;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: #f8fafc;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
     .notice {
       background: #fff7e6;
       border: 1px solid #ffd38a;
       color: #704600;
-      border-radius: 8px;
-      padding: 10px 12px;
+      border-radius: 10px;
+      padding: 11px 12px;
       font-size: 13px;
       margin-top: 14px;
       line-height: 1.45;
@@ -392,25 +486,63 @@
       text-align: center;
       color: var(--muted);
       padding: 40px;
-      background: white;
-      border-radius: 12px;
+      background: #fff;
+      border-radius: 14px;
       border: 1px solid var(--border);
     }
 
     footer {
       text-align: center;
       color: var(--muted);
-      padding: 22px;
+      padding: 20px;
       font-size: 12px;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      line-height: 1.6;
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 22px;
+    footer a {
+      color: var(--red);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media(max-width:850px) {
+      .stats {
+        grid-template-columns: repeat(2,1fr);
       }
 
-      .meta,
-      .doc-actions {
+      .toolbar-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .doc-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        text-align: left;
+      }
+
+      .hero p {
+        margin-left: 0;
+      }
+
+      .top-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media(max-width:520px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .meta {
         grid-template-columns: 1fr;
       }
 
@@ -422,35 +554,50 @@
 </head>
 
 <body>
-  <header>
-    <h1>DDC ILMI SDS &amp; COSHH Assessment Library</h1>
-    <p>Scan QR code or search to access chemical SDS and COSHH assessment documents</p>
-  </header>
+  <section class="hero">
+    <h1>DDC ILMI SDS &amp; COSHH Library</h1>
+    <p>Interactive chemical safety library for quick access to SDS documents, COSHH assessments, GHS pictograms, storage quantity, expiry details, and briefing status.</p>
+    <div class="top-actions">
+      <span class="pill">🏗️ ILMI Project</span>
+      <span class="pill">🧪 Chemical Safety</span>
+      <span class="pill">📱 QR Ready</span>
+    </div>
+  </section>
 
-  <div class="top-panel">
-    <div class="legend-wrap" id="legend"></div>
+  <div class="stats" id="stats"></div>
 
-    <div class="toolbar" id="toolbar">
-      <input class="search" id="searchBox" placeholder="Search chemicals, manufacturer, hazard, batch..." />
+  <div class="legend-wrap" id="legend"></div>
 
-      <select class="filter" id="hazardFilter">
-        <option value="">All hazards</option>
+  <div class="toolbar" id="toolbar">
+    <div class="toolbar-inner">
+      <input class="search" id="searchBox" placeholder="Search chemical, manufacturer, batch, hazard..." />
+
+      <select class="select" id="hazardFilter">
+        <option value="">All GHS hazards</option>
       </select>
 
-      <select class="filter" id="manufacturerFilter">
+      <select class="select" id="makerFilter">
         <option value="">All manufacturers</option>
       </select>
 
-      <button class="btn-small" onclick="clearSearch()">Clear</button>
+      <select class="select" id="docFilter">
+        <option value="">All document status</option>
+        <option value="both">SDS + COSHH linked</option>
+        <option value="missingSds">Missing SDS link</option>
+        <option value="missingCoshh">Missing COSHH link</option>
+      </select>
+
+      <button onclick="clearSearch()">Clear</button>
     </div>
   </div>
-
-  <section class="stats" id="stats"></section>
 
   <main id="app"></main>
 
   <footer>
-    HSE Department · DaiDung Steel &amp; Construction · ILMI Project
+    HSE Department · DaiDung Steel &amp; Construction · ILMI Project<br>
+    For any SDS/COSHH update or query, contact:
+    <a href="mailto:sonu.ummer@daidungcorp.com">sonu.ummer@daidungcorp.com</a><br>
+    Auto-generated from inventory.xlsx
   </footer>
 
   <script>
@@ -470,51 +617,55 @@
 
     function hazardText(item) {
       return item.hazards && item.hazards.length
-        ? item.hazards.map(h => h.key || h.label).join(", ")
+        ? item.hazards.map(h => h.key).join(", ")
         : "No GHS pictogram marked in inventory";
     }
 
     function cardLevel(item) {
       const keys = (item.hazards || []).map(h => h.key);
-      if (keys.includes("FLAMMABLE") || keys.includes("ACUTE TOXICITY") || keys.includes("CORROSIVE")) return "high";
-      if (keys.includes("SERIOUS HEALTH HAZARD") || keys.includes("HEALTH HAZARD")) return "health";
-      if (keys.includes("HAZARDOUS TO ENVIRONMENT")) return "medium";
+
+      if (keys.includes("FLAMMABLE") || keys.includes("ACUTE TOXICITY") || keys.includes("CORROSIVE")) {
+        return "high";
+      }
+
+      if (keys.includes("SERIOUS HEALTH HAZARD") || keys.includes("HEALTH HAZARD")) {
+        return "health";
+      }
+
+      if (keys.includes("HAZARDOUS TO ENVIRONMENT")) {
+        return "medium";
+      }
+
       return "";
     }
 
-    function getSdsLink(item) {
-      return item.sdsLink || item.sds || item.sdsUrl || "";
+    function docButton(url, label, cls) {
+      return url
+        ? `<a class="link-btn ${cls || ""}" href="${esc(url)}" target="_blank" rel="noopener">${label}</a>`
+        : `<a class="link-btn disabled">${label} Not Linked</a>`;
     }
 
-    function getCoshhLink(item) {
-      return item.coshhLink || item.coshh || item.coshhUrl || "";
-    }
+    function renderStats() {
+      const total = chemicals.length;
+      const flammable = chemicals.filter(c => (c.hazards || []).some(h => h.key === "FLAMMABLE")).length;
+      const sds = chemicals.filter(c => c.sdsLink).length;
+      const coshh = chemicals.filter(c => c.coshhLink).length;
 
-    function sdsButton(item) {
-      const link = getSdsLink(item);
-      if (!link) {
-        return `<a class="link-btn disabled">SDS Not Linked</a>`;
-      }
-      return `<a class="link-btn sds-btn" href="${esc(link)}" target="_blank" rel="noopener">📄 SDS</a>`;
-    }
-
-    function coshhButton(item) {
-      const link = getCoshhLink(item);
-      if (!link) {
-        return `<a class="link-btn disabled">COSHH Not Linked</a>`;
-      }
-      return `<a class="link-btn coshh-btn" href="${esc(link)}" target="_blank" rel="noopener">🛡️ COSHH</a>`;
+      document.getElementById("stats").innerHTML = `
+        <div class="stat"><b>${total}</b><span>Total chemicals</span></div>
+        <div class="stat"><b>${flammable}</b><span>Flammable marked</span></div>
+        <div class="stat"><b>${sds}</b><span>SDS linked</span></div>
+        <div class="stat"><b>${coshh}</b><span>COSHH linked</span></div>
+      `;
     }
 
     function renderLegend() {
-      const legend = document.getElementById("legend");
-
       if (typeof ghsLegend === "undefined" || !Array.isArray(ghsLegend)) {
-        legend.innerHTML = "";
+        document.getElementById("legend").innerHTML = "";
         return;
       }
 
-      legend.innerHTML = ghsLegend.map(h => `
+      document.getElementById("legend").innerHTML = ghsLegend.map(h => `
         <span class="legend-item">
           <img src="assets/${esc(h.icon)}" alt="${esc(h.label)}">
           ${esc(h.label)}
@@ -522,39 +673,82 @@
       `).join("");
     }
 
+    function setupFilters() {
+      const hf = document.getElementById("hazardFilter");
+      const mf = document.getElementById("makerFilter");
+
+      if (typeof ghsLegend !== "undefined" && Array.isArray(ghsLegend)) {
+        ghsLegend.forEach(h => hf.add(new Option(h.label, h.key)));
+      }
+
+      [...new Set(chemicals.map(c => c.manufacturer).filter(Boolean))]
+        .sort()
+        .forEach(m => mf.add(new Option(m, m)));
+
+      ["searchBox", "hazardFilter", "makerFilter", "docFilter"].forEach(id => {
+        document.getElementById(id).addEventListener("input", applyFilters);
+        document.getElementById(id).addEventListener("change", applyFilters);
+      });
+    }
+
+    function applyFilters() {
+      const q = document.getElementById("searchBox").value.toLowerCase().trim();
+      const h = document.getElementById("hazardFilter").value;
+      const m = document.getElementById("makerFilter").value;
+      const d = document.getElementById("docFilter").value;
+
+      const filtered = chemicals.filter(item => {
+        const text = [
+          item.name,
+          item.manufacturer,
+          item.batchNo,
+          item.flashPoint,
+          item.expiryDate,
+          item.qtyStored,
+          item.msdsStatus,
+          item.coshhStatus,
+          hazardText(item)
+        ].join(" ").toLowerCase();
+
+        if (q && !text.includes(q)) return false;
+        if (h && !(item.hazards || []).some(x => x.key === h)) return false;
+        if (m && item.manufacturer !== m) return false;
+        if (d === "both" && (!item.sdsLink || !item.coshhLink)) return false;
+        if (d === "missingSds" && item.sdsLink) return false;
+        if (d === "missingCoshh" && item.coshhLink) return false;
+
+        return true;
+      });
+
+      renderGrid(filtered);
+    }
+
+    function clearSearch() {
+      ["searchBox", "hazardFilter", "makerFilter", "docFilter"].forEach(id => {
+        document.getElementById(id).value = "";
+      });
+
+      renderGrid(chemicals);
+      document.getElementById("searchBox").focus();
+    }
+
     function toggleCard(id) {
       const card = document.getElementById("card-" + id);
-      const btn = document.getElementById("btn-" + id);
+      const indicator = document.getElementById("indicator-" + id);
 
-      if (!card || !btn) return;
+      if (!card || !indicator) return;
 
       card.classList.toggle("open");
 
       if (card.classList.contains("open")) {
-        btn.innerHTML = "Hide Details ▲";
+        indicator.innerHTML = "Hide Details ▲";
       } else {
-        btn.innerHTML = "View Chemical Details ▼";
+        indicator.innerHTML = "View Details ▼";
       }
-    }
-
-    function renderStats(list) {
-      const total = chemicals.length;
-      const showing = list.length;
-      const withSds = chemicals.filter(c => getSdsLink(c)).length;
-      const withCoshh = chemicals.filter(c => getCoshhLink(c)).length;
-
-      document.getElementById("stats").innerHTML = `
-        <div class="stat-card"><b>${esc(total)}</b><span>Total chemicals</span></div>
-        <div class="stat-card"><b>${esc(showing)}</b><span>Currently showing</span></div>
-        <div class="stat-card"><b>${esc(withSds)}</b><span>SDS linked</span></div>
-        <div class="stat-card"><b>${esc(withCoshh)}</b><span>COSHH linked</span></div>
-      `;
     }
 
     function renderGrid(list) {
       const app = document.getElementById("app");
-
-      renderStats(list);
 
       if (!list.length) {
         app.innerHTML = `<div class="empty">No chemical found.</div>`;
@@ -570,9 +764,9 @@
               <div class="icons">${(item.hazards || []).map(iconHtml).join("")}</div>
             </div>
 
-            <button class="expand-btn" id="btn-${esc(item.id)}" type="button">
-              View Chemical Details ▼
-            </button>
+            <div class="expand-indicator" id="indicator-${esc(item.id)}">
+              View Details ▼
+            </div>
           </div>
 
           <div class="card-details">
@@ -585,13 +779,13 @@
               <div><b>Inventory Row</b>${esc(item.excelRow || "-")}</div>
             </div>
 
-            <a class="expand-btn" href="?id=${encodeURIComponent(item.id)}">
+            <a class="link-btn" href="?id=${encodeURIComponent(item.id)}">
               Open Full Chemical Page
             </a>
 
-            <div class="doc-actions">
-              ${sdsButton(item)}
-              ${coshhButton(item)}
+            <div class="doc-row">
+              ${docButton(item.sdsLink, "📄 SDS", "primary")}
+              ${docButton(item.coshhLink, "🛡️ COSHH", "coshh")}
             </div>
           </div>
 
@@ -603,7 +797,6 @@
       const app = document.getElementById("app");
 
       document.getElementById("toolbar").style.display = "none";
-      document.getElementById("stats").style.display = "none";
 
       app.innerHTML = `
         <div class="detail">
@@ -613,92 +806,56 @@
 
           <div class="icons">${(item.hazards || []).map(iconHtml).join("")}</div>
 
-          <div class="meta">
-            <div><b>Hazards</b>${esc(hazardText(item))}</div>
-            <div><b>Manufacturer / Trade Name</b>${esc(item.manufacturer || "-")}</div>
-            <div><b>Flash Point</b>${esc(item.flashPoint || "-")}</div>
-            <div><b>Batch / Lot No.</b>${esc(item.batchNo || "-")}</div>
-            <div><b>HCS Expiry Date</b>${esc(item.expiryDate || "-")}</div>
-            <div><b>Quantity Stored</b>${esc(item.qtyStored || "-")}</div>
-            <div><b>MSDS Status</b>${esc(item.msdsStatus || "-")}</div>
-            <div><b>COSHH Status</b>${esc(item.coshhStatus || "-")}</div>
-            <div><b>Briefing Record</b>${esc(item.briefingRecord || "-")}</div>
-            <div><b>Inventory Excel Row</b>${esc(item.excelRow || "-")}</div>
+          <div class="tabs">
+            <button class="tab active" onclick="showTab('overview', this)">Overview</button>
+            <button class="tab" onclick="showTab('sds', this)">SDS</button>
+            <button class="tab" onclick="showTab('coshh', this)">COSHH Assessment</button>
           </div>
 
-          <div class="doc-actions">
-            ${sdsButton(item)}
-            ${coshhButton(item)}
+          <div id="overview" class="tab-panel active">
+            <div class="meta">
+              <div><b>Hazards</b>${esc(hazardText(item))}</div>
+              <div><b>Manufacturer / Trade Name</b>${esc(item.manufacturer || "-")}</div>
+              <div><b>Flash Point</b>${esc(item.flashPoint || "-")}</div>
+              <div><b>Batch / Lot No.</b>${esc(item.batchNo || "-")}</div>
+              <div><b>HCS Expiry Date</b>${esc(item.expiryDate || "-")}</div>
+              <div><b>Quantity Stored</b>${esc(item.qtyStored || "-")}</div>
+              <div><b>SDS Status</b>${esc(item.sdsStatus || "-")}</div>
+              <div><b>COSHH Status</b>${esc(item.coshhStatus || "-")}</div>
+              <div><b>COSHH Expiry</b>${esc(item.coshhExpiryDate || "-")}</div>
+              <div><b>Briefing Record</b>${esc(item.briefingRecord || "-")}</div>
+              <div><b>Inventory Excel Row</b>${esc(item.excelRow || "-")}</div>
+              <div><b>Register No.</b>${esc(item.registerNo || "-")}</div>
+            </div>
+          </div>
+
+          <div id="sds" class="tab-panel">
+            <h3>Safety Data Sheet (SDS)</h3>
+            <p>Open the SDS document uploaded in Google Drive.</p>
+            ${docButton(item.sdsLink, "📄 Open SDS Document", "primary")}
+          </div>
+
+          <div id="coshh" class="tab-panel">
+            <h3>COSHH Assessment</h3>
+            <p>Open the COSHH assessment document uploaded in Google Drive.</p>
+            ${docButton(item.coshhLink, "🛡️ Open COSHH Assessment", "coshh")}
           </div>
 
           <div class="notice">
             This page is for quick HSE reference only. Before using any chemical, follow the approved SDS, COSHH assessment, risk assessment, method statement, permit requirements, and site HSE instructions.
+            <br><br>
+            For any update or query, contact: <b>sonu.ummer@daidungcorp.com</b>
           </div>
         </div>
       `;
     }
 
-    function populateFilters() {
-      const hazardFilter = document.getElementById("hazardFilter");
-      const manufacturerFilter = document.getElementById("manufacturerFilter");
+    function showTab(id, btn) {
+      document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
 
-      const hazardSet = new Set();
-      const manufacturerSet = new Set();
-
-      chemicals.forEach(item => {
-        (item.hazards || []).forEach(h => {
-          if (h.label) hazardSet.add(h.label);
-        });
-
-        if (item.manufacturer) {
-          manufacturerSet.add(item.manufacturer);
-        }
-      });
-
-      Array.from(hazardSet).sort().forEach(hazard => {
-        hazardFilter.innerHTML += `<option value="${esc(hazard)}">${esc(hazard)}</option>`;
-      });
-
-      Array.from(manufacturerSet).sort().forEach(manufacturer => {
-        manufacturerFilter.innerHTML += `<option value="${esc(manufacturer)}">${esc(manufacturer)}</option>`;
-      });
-    }
-
-    function applyFilters() {
-      const q = document.getElementById("searchBox").value.toLowerCase().trim();
-      const hazard = document.getElementById("hazardFilter").value;
-      const manufacturer = document.getElementById("manufacturerFilter").value;
-
-      const filtered = chemicals.filter(item => {
-        const text = [
-          item.id,
-          item.name,
-          item.manufacturer,
-          item.batchNo,
-          item.flashPoint,
-          item.expiryDate,
-          item.qtyStored,
-          item.msdsStatus,
-          item.coshhStatus,
-          hazardText(item)
-        ].join(" ").toLowerCase();
-
-        const matchSearch = !q || text.includes(q);
-        const matchHazard = !hazard || (item.hazards || []).some(h => h.label === hazard);
-        const matchManufacturer = !manufacturer || item.manufacturer === manufacturer;
-
-        return matchSearch && matchHazard && matchManufacturer;
-      });
-
-      renderGrid(filtered);
-    }
-
-    function clearSearch() {
-      document.getElementById("searchBox").value = "";
-      document.getElementById("hazardFilter").value = "";
-      document.getElementById("manufacturerFilter").value = "";
-      renderGrid(chemicals);
-      document.getElementById("searchBox").focus();
+      document.getElementById(id).classList.add("active");
+      btn.classList.add("active");
     }
 
     function start() {
@@ -711,8 +868,9 @@
         return;
       }
 
+      renderStats();
       renderLegend();
-      populateFilters();
+      setupFilters();
 
       const params = new URLSearchParams(window.location.search);
       const id = Number(params.get("id"));
@@ -732,10 +890,6 @@
       }
 
       renderGrid(chemicals);
-
-      document.getElementById("searchBox").addEventListener("input", applyFilters);
-      document.getElementById("hazardFilter").addEventListener("change", applyFilters);
-      document.getElementById("manufacturerFilter").addEventListener("change", applyFilters);
     }
 
     start();
