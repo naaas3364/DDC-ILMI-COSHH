@@ -29,7 +29,7 @@ const chemicals = [
     "msdsStatus": "Yes",
     "coshhStatus": "Yes",
     "briefingRecord": "Yes",
-    "sdsCoshhLink": "COSHH%20&%20MSDS/International%20Paints%20Intergard%20251%20Part%20A%20Base.pdf"
+    "sdsCoshhLink": "https://drive.google.com/file/d/1NTgiIQ4QmKg7_7tnHM13zTGHcndVVSin/view?usp=drive_link"
   },
   {
     "id": 2,
