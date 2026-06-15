@@ -924,6 +924,8 @@ body::before {
       const sds = chemicals.filter(c => c.sdsLink).length;
       const coshh = chemicals.filter(c => c.coshhLink).length;
 
+
+      
       document.getElementById("stats").innerHTML = `
         <div class="stat"><b>${total}</b><span>Total chemicals</span></div>
         <div class="stat"><b>${flammable}</b><span>Flammable</span></div>
