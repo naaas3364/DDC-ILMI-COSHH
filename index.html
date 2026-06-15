@@ -53,18 +53,10 @@ body::before {
   z-index: 0;
   filter: grayscale(100%);
 }
-    #visit-counter {
-  display: inline-block;
-  min-width: 28px;
-  padding: 2px 8px;
-  margin-left: 4px;
-  background: #f6f9fe;
-  border: 1px solid #d7e0ee;
-  border-radius: 6px;
+  #visit-counter {
   color: var(--red);
   font-weight: 800;
   font-size: 12px;
-  line-height: 1.4;
 }
 
     .hero {
@@ -152,7 +144,7 @@ footer {
       grid-template-columns: repeat(4, minmax(145px, 1fr));
       gap: 12px;
       max-width: 1080px;
-      margin: -28px auto 18px;
+      margin: 32px auto 18px;
       padding: 0 16px;
       position: relative;
       z-index: 2;
@@ -616,11 +608,11 @@ footer {
       }
 
       .stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        margin: -18px auto 12px;
-        padding: 0 10px;
-      }
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 22px auto 12px;
+  padding: 0 10px;
+}
 
       .stat {
         min-height: 72px;
@@ -882,7 +874,7 @@ body::before {
     HSE Department · DaiDung Steel &amp; Construction · ILMI Project<br>
     For any SDS/COSHH update or query, contact:
     <a href="mailto:sonu.ummer@daidungcorp.com">sonu.ummer@daidungcorp.com</a><br>
-    Page visits: <span id="visit-counter">Loading...</span><br>
+    Page visits: <span id="visit-counter">0</span><br>
  
   </footer>
 
@@ -1189,20 +1181,23 @@ body::before {
 
     start();
   </script>
- <script>
-  var gcTimer = setInterval(function() {
+<script data-goatcounter="https://naaas3364.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+<script>
+  function loadVisitCount() {
     if (window.goatcounter && window.goatcounter.visit_count) {
-      clearInterval(gcTimer);
       window.goatcounter.visit_count({
         append: "#visit-counter",
         path: "TOTAL",
         no_branding: true
       });
+    } else {
+      setTimeout(loadVisitCount, 300);
     }
-  }, 100);
-</script>
+  }
 
-<script data-goatcounter="https://naaas3364.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+  loadVisitCount();
+</script>
 </body>
 </html>
